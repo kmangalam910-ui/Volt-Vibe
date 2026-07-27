@@ -5,7 +5,11 @@ import { SlidersHorizontal, ChevronDown, ChevronUp, Search } from 'lucide-react'
 
 const FilterSection = ({ filterLogic: passedFilterLogic }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { categoryOnlyData, colorOnlyData, priceOnlyData } = useCategoriesLogic();
+  const {
+    categoryOnlyData, 
+    colorOnlyData, 
+    priceOnlyData 
+  } = useCategoriesLogic();
   
   const fallbackFilterLogic = useFilterLogic();
   const filterLogic = passedFilterLogic || fallbackFilterLogic;
@@ -50,7 +54,7 @@ const FilterSection = ({ filterLogic: passedFilterLogic }) => {
       {isOpen && (
         <div className='p-4 border-t border-gray-200 flex flex-col lg:flex-row flex-wrap items-center justify-between gap-4 bg-gray-100'>
           {/* Search Input */}
-          <div className='w-full lg:w-auto flex-1 min-w-[200px] relative flex items-center'>
+          <div className='w-full lg:w-auto flex-1 min-w-50 relative flex items-center'>
             <Search className='absolute left-3 h-4 w-4 text-gray-400 pointer-events-none' />
             <input
               type="text"

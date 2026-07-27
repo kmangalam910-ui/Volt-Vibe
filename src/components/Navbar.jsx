@@ -1,5 +1,6 @@
 import { MapPin, Search, Menu, ShoppingBag } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { SignInButton, UserButton, useAuth } from '@clerk/react';
 import { FaCaretDown } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
@@ -23,6 +24,9 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const sidebarRef = useRef(null);
   const backdropRef = useRef(null);
+
+  const cart = useSelector((state) => state.cart || []);
+  const totalCartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const {
     manualAddress,
@@ -121,7 +125,7 @@ const Navbar = () => {
                       value={manualAddress}
                       onChange={(e) => setManualAddress(e.target.value)}
                       placeholder='Enter your address'
-                      className='rounded-full border border-gray-200 px-3 py-2 text-sm outline-none focus:border-red-500'
+                      className='rounded-full border border-gray-200 px-3 py-2 text-sm outline-none'
                     />
                     <button type='submit' disabled={isLoading} className='flex items-center justify-center gap-2 cursor-pointer rounded-full bg-red-500 px-4 py-1 text-white transition hover:bg-red-400 disabled:opacity-60'>
                       {isLoading ? <Loader size={4} label='Saving' /> : 'Save Address'}
@@ -151,7 +155,9 @@ const Navbar = () => {
 
             <Link to='/cart' className='relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 transition hover:bg-gray-200'>
               <IoCartOutline className='h-6 w-6' />
-              <span className='absolute -right-1 -top-1 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white'>0</span>
+              <span className='absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white shadow-sm'>
+                {totalCartCount}
+              </span>
             </Link>
 
             {!isLoaded ? null : isSignedIn ? (
@@ -166,7 +172,9 @@ const Navbar = () => {
           <div className='flex items-center gap-3 lg:hidden'>
             <Link to='/cart' className='relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 transition hover:bg-gray-200'>
               <ShoppingBag className='h-5 w-5' />
-              <span className='absolute -right-1 -top-1 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white'>0</span>
+              <span className='absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white shadow-sm'>
+                {totalCartCount}
+              </span>
             </Link>
           </div>
         </div>
@@ -213,7 +221,7 @@ const Navbar = () => {
                     value={manualAddress}
                     onChange={(e) => setManualAddress(e.target.value)}
                     placeholder='Enter your address'
-                    className='rounded-full border border-gray-200 px-3 py-2 text-sm outline-none focus:border-red-500'
+                    className='rounded-full border border-gray-200 px-3 py-2 text-sm outline-none'
                   />
                     <button type='submit' disabled={isLoading} className='flex items-center justify-center gap-2 cursor-pointer rounded-full bg-red-500 px-4 py-1 text-white transition hover:bg-red-400 disabled:opacity-60'>
                       {isLoading ? <Loader size={4} label='Saving' /> : 'Save Address'}
