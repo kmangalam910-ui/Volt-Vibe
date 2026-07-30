@@ -67,7 +67,7 @@ const useCartLogic = () => {
   };
 
   const handleCheckout = () => {
-    setIsCheckoutModalOpen(true);
+    navigate('/checkout');
   };
 
   const handleCloseModal = () => {

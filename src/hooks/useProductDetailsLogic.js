@@ -197,8 +197,7 @@ const useProductDetailsLogic = () => {
 
   const handleBuyNow = () => {
     if (!product) return;
-    dispatch(cartActions.addToCart({ ...product, quantity }));
-    navigate('/cart');
+    navigate('/checkout', { state: { directItem: { ...product, quantity } } });
   };
 
   return {

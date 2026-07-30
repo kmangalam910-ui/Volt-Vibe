@@ -185,8 +185,8 @@ const ProductDetails = () => {
                 <Zap size={14} className='text-amber-500' /> Product Highlights
               </h4>
               <ul className='grid grid-cols-1 gap-2 text-xs text-gray-700'>
-                {highlights.slice(0, 3).map((item, idx) => (
-                  <li key={idx} className='flex items-center gap-2'>
+                {highlights.slice(0, 3).map((item, index) => (
+                  <li key={index} className='flex items-center gap-2'>
                     <CheckCircle2 size={14} className='text-emerald-500 shrink-0' />
                     <span>{item}</span>
                   </li>
@@ -318,7 +318,7 @@ const ProductDetails = () => {
             {activeTab === 'specs' && (
               <div className='space-y-4'>
                 <h3 className='text-lg font-bold text-gray-900'>Technical Specifications</h3>
-                <div className='rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-100 text-sm'>
+                <div className='rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-300 text-sm'>
                   {specs.map((spec, idx) => (
                     <div key={idx} className={`grid grid-cols-1 sm:grid-cols-3 p-4 ${idx % 2 === 0 ? 'bg-gray-50/50' : 'bg-white'}`}>
                       <span className='font-bold text-gray-700 sm:col-span-1'>{spec.label}</span>
@@ -353,16 +353,16 @@ const ProductDetails = () => {
                     <div className='flex items-center gap-2'>
                       <span>4 ★</span>
                       <div className='w-full bg-gray-200 h-2 rounded-full overflow-hidden'>
-                        <div className='bg-amber-400 h-2 w-[10%]'></div>
+                        <div className='bg-amber-400 h-2 w-[60%]'></div>
                       </div>
-                      <span>10%</span>
+                      <span>60%</span>
                     </div>
                     <div className='flex items-center gap-2'>
                       <span>3 ★</span>
                       <div className='w-full bg-gray-200 h-2 rounded-full overflow-hidden'>
-                        <div className='bg-amber-400 h-2 w-[5%]'></div>
+                        <div className='bg-amber-400 h-2 w-[10%]'></div>
                       </div>
-                      <span>5%</span>
+                      <span>10%</span>
                     </div>
                   </div>
                 </div>
