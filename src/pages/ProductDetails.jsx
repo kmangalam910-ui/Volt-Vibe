@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import useProductDetailsLogic from '../hooks/useProductDetailsLogic';
 import ProductCard from '../components/ProductCard';
-import Loader from '../components/Loader';
+import PageSkeleton from '../components/PageSkeleton';
 
 const ProductDetails = () => {
   const {
@@ -37,12 +37,7 @@ const ProductDetails = () => {
   } = useProductDetailsLogic();
 
   if (!product || !customDetails) {
-    return (
-      <div className='min-h-[70vh] flex flex-col items-center justify-center gap-4 py-16 px-4'>
-        <Loader size={8} label='Loading product details...' />
-        <p className='text-gray-500 font-semibold text-sm'>Fetching technical specifications</p>
-      </div>
-    );
+    return <PageSkeleton type='product-details' />;
   }
 
   const {

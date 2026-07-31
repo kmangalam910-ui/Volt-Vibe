@@ -95,7 +95,7 @@ const Checkout = () => {
           <div className='rounded-2xl bg-gray-50 p-4 border border-gray-100 text-left text-xs space-y-2 text-gray-600'>
             <div className='flex justify-between border-b border-gray-200/60 pb-2'>
               <span>Delivery Address:</span>
-              <span className='font-semibold text-gray-900 text-right max-w-[200px] truncate'>
+              <span className='font-semibold text-gray-900 text-right max-w-50 truncate'>
                 {placedOrderInfo.shippingAddress.address}, {placedOrderInfo.shippingAddress.city}
               </span>
             </div>
@@ -256,7 +256,8 @@ const Checkout = () => {
                       name='phone'
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder='+91 98765 43210'
+                      maxLength={10}
+                      placeholder='9876543210'
                       className={`w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition ${
                         formErrors.phone ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-red-500 focus:ring-1 focus:ring-red-500'
                       }`}

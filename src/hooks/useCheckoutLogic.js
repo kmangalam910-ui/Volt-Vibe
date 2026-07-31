@@ -67,7 +67,11 @@ const useCheckoutLogic = () => {
   // Handlers for form inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    let finalValue = value;
+    if (name === 'phone') {
+      finalValue = value.replace(/\D/g, '').slice(0, 10);
+    }
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: '' }));
     }
@@ -109,7 +113,11 @@ const useCheckoutLogic = () => {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = 'Invalid email address format';
     }
-    if (!formData.phone.trim()) errors.phone = 'Phone number is required';
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(formData.phone.trim())) {
+      errors.phone = 'Phone number must be exactly 10 digits';
+    }
     if (!formData.address.trim()) errors.address = 'Street address is required';
     if (!formData.city.trim()) errors.city = 'City is required';
     if (!formData.state.trim()) errors.state = 'State / Province is required';

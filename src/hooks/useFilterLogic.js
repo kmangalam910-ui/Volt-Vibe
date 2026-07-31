@@ -1,16 +1,42 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { DataContext } from "../store/contextStore";
 
 const useFilterLogic = () => {
   const { products, fetchProducts } = useContext(DataContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const paramCategory = searchParams.get('category') || 'ALL';
+
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('ALL');
+  const [category, setCategoryState] = useState(paramCategory);
   const [color, setColor] = useState('ALL');
   const [priceRange, setPriceRange] = useState([299, 74999]);
 
+  // Sync state when URL searchParams change
+  useEffect(() => {
+    const currentCategory = searchParams.get('category');
+    if (currentCategory) {
+      setCategoryState(currentCategory);
+    } else {
+      setCategoryState('ALL');
+    }
+  }, [searchParams]);
+
+  const setCategory = (newCat) => {
+    setCategoryState(newCat);
+    if (newCat && newCat.toUpperCase() !== 'ALL') {
+      setSearchParams({ category: newCat });
+    } else {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.delete('category');
+      setSearchParams(newParams);
+    }
+  };
+
   const handleCategoryChange = (e) => {
     const val = e.target.value;
-    setCategory((prev) => (prev === val ? 'ALL' : val));
+    setCategory(category === val ? 'ALL' : val);
   };
 
   const handleColorChange = (e) => {
