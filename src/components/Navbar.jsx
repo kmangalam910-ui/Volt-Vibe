@@ -1,4 +1,4 @@
-import { MapPin, Search, Menu, ShoppingBag } from 'lucide-react';
+import { MapPin, Search, Menu, ShoppingBag, ArrowLeft } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { SignInButton, UserButton, useAuth } from '@clerk/react';
@@ -22,6 +22,7 @@ const Navbar = () => {
   const { isLoaded, isSignedIn } = useAuth();
   const { location, getLocation, openDropdown, setOpenDropdown } = useLocationLogic();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showMenuArrowPrompt, setShowMenuArrowPrompt] = useState(true);
   const sidebarRef = useRef(null);
   const backdropRef = useRef(null);
 
@@ -38,6 +39,15 @@ const Navbar = () => {
     handleManualAddress,
     isLoading,
   } = useAddressLogic({ location, getLocation, setOpenDropdown, openDropdown });
+
+  // Show animated menu arrow prompt on mobile for ~3 seconds on open
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMenuArrowPrompt(false);
+    }, 3200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (!sidebarRef.current || !backdropRef.current) return;
@@ -86,14 +96,34 @@ const Navbar = () => {
       <header className='sticky top-0 z-40 border-b border-gray-100 bg-white/95 py-4 shadow-sm backdrop-blur'>
         <div className='mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8'>
           <div className='flex items-center gap-4'>
-            <button
-              type='button'
-              onClick={() => setIsMobileMenuOpen(true)}
-              className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-red-500 hover:text-red-500 lg:hidden'
-              aria-label='Open menu'
-            >
-              <Menu size={20} />
-            </button>
+            {/* Mobile Menu Button Container */}
+            <div className='relative flex items-center lg:hidden'>
+              <button
+                type='button'
+                onClick={() => {
+                  setIsMobileMenuOpen(true);
+                  setShowMenuArrowPrompt(false);
+                }}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition cursor-pointer relative z-10 ${
+                  showMenuArrowPrompt
+                    ? 'border-red-500 text-red-500 ring-4 ring-red-500/30 animate-pulse'
+                    : 'border-gray-200 text-gray-700 hover:border-red-500 hover:text-red-500'
+                }`}
+                aria-label='Open menu'
+              >
+                <Menu size={20} />
+              </button>
+
+              {/* Animated Arrow Pointer pointing to side menu on mobile */}
+              {showMenuArrowPrompt && !isMobileMenuOpen && (
+                <div className='absolute left-12 top-1/2 -translate-y-1/2 z-50 flex items-center gap-1.5 pointer-events-none animate-bounce'>
+                  <div className='flex items-center gap-1 bg-gradient-to-r from-red-600 via-red-500 to-pink-600 text-white text-[11px] font-black px-2.5 py-1 rounded-full shadow-lg shadow-red-500/40 whitespace-nowrap border border-white/20'>
+                    <ArrowLeft className='w-3.5 h-3.5 animate-pulse' />
+                    <span>Open Menu!</span>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link to='/' className='flex items-center'>
               <h1 className='text-2xl font-bold sm:text-3xl'>
