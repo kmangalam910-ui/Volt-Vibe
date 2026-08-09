@@ -1,1 +1,0 @@
-import{a as e,n as t,t as n}from"./jsx-runtime-n5LQ9ujS.js";t();var r=e(n(),1),i=()=>(0,r.jsx)(`div`,{children:`About`});export{i as default};
