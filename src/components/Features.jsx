@@ -14,7 +14,7 @@ const Features = () => {
       <div className='max-w-7xl mx-auto'>
         <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8'>
             {features.map((feature, index)=> {
-               return <div key={index} className='flex py-5 rounded-lg shadow-md shadow-black items-center justify-center text-center sm:text-left'>
+               return <div key={index} className='flex py-5 rounded-lg shadow-sm shadow-gray-700/50 items-center justify-center text-center sm:text-left'>
                     <feature.icon className='shrink-0 h-10 w-10 text-gray-600' aria-hidden="true" />
                     <div className='ml-4'>
                         <p className='text-base font-medium text-gray-900'>{feature.text}</p>

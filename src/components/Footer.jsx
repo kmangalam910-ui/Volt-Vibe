@@ -15,18 +15,18 @@ const Footer = () => {
             </Link>
             <p className='mt-2 text-sm'>Powering Your World with the Best in Electronics.</p>
             <p className='mt-2 text-sm'>123 Electronics St, Style City, NY 10001</p>
-            <p className='text-sm'>Email: support@Zaptro.com</p>
+            <p className='text-sm'>Email: <a href="mailto:kmangalam910@gmail.com" className="hover:underline text-gray-300">kmangalam910@gmail.com</a></p>
             <p className='text-sm'>Phone: (123) 456-7890</p>
         </div>
         {/* customer service link */}
         <div className='mb-6 md:mb-0'>
             <h3 className='text-xl font-semibold'>Customer Service</h3>
             <ul className='mt-2 text-sm space-y-2'>
-                <li>Contact Us</li>
+                <li><Link to='/contact' className='hover:text-red-400 transition'>Contact Us</Link></li>
+                <li><Link to='/about' className='hover:text-red-400 transition'>About Us</Link></li>
                 <li>Shipping & Returns</li>
                 <li>FAQs</li>
                 <li>Order Tracking</li>
-                <li>Size Guide</li>
             </ul>
         </div>
         {/* social media links */}

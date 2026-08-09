@@ -316,38 +316,6 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  {/* Promo Code Form */}
-                  <form onSubmit={handleApplyPromo} className='space-y-2 pt-2'>
-                    <label className='text-xs font-semibold text-gray-600 flex items-center gap-1'>
-                      <Tag size={13} className='text-red-500' /> Promo / Coupon Code
-                    </label>
-                    <div className='flex gap-2'>
-                      <input
-                        type='text'
-                        value={promoCode}
-                        onChange={(e) => setPromoCode(e.target.value)}
-                        placeholder='Try VOLT10 or VOLT20'
-                        className='w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition'
-                      />
-                      <button
-                        type='submit'
-                        className='rounded-xl bg-gray-900 px-4 py-2 text-xs font-semibold text-white hover:bg-gray-800 transition cursor-pointer shrink-0'
-                      >
-                        Apply
-                      </button>
-                    </div>
-
-                    {promoMessage.text && (
-                      <p
-                        className={`text-xs font-medium ${
-                          promoMessage.type === 'success' ? 'text-emerald-600' : 'text-red-500'
-                        }`}
-                      >
-                        {promoMessage.text}
-                      </p>
-                    )}
-                  </form>
-
                   {/* Checkout Button */}
                   <button
                     onClick={handleCheckout}
