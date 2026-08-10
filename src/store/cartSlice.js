@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const localCartFromStorage = () => {
+  try {
+    const storedCart = localStorage.getItem('cart');
+    return storedCart ? JSON.parse(storedCart) : [];
+  } catch (error) {
+    console.error('Error parsing cart from localStorage:', error);
+    return [];
+  }
+}
+
 const cartSlice = createSlice({
   name: 'CART',
-  initialState: [],
+  initialState: localCartFromStorage(),
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;

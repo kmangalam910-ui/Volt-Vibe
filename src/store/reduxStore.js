@@ -7,4 +7,12 @@ const store = configureStore({
   }
 });
 
+store.subscribe(() => {
+  try{
+    localStorage.setItem('cart', JSON.stringify(store.getState().cart));
+  }catch(error){
+    console.error('Error saving cart to localStorage:', error);
+  }
+})
+
 export default store;
