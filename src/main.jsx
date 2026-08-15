@@ -9,6 +9,10 @@ import { DataProvider } from "./store/contextStore.jsx";
 
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+if (!publishableKey) {
+  throw new Error("Missing Publishable Key. Please add VITE_CLERK_PUBLISHABLE_KEY to your environment variables.");
+}
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DataProvider>

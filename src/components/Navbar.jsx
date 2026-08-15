@@ -182,9 +182,7 @@ const Navbar = () => {
             </Link>
 
             {/* Auth Buttons */}
-            {!isLoaded ? (
-              <div className='h-9 w-20 animate-pulse rounded-full bg-gray-200' />
-            ) : isSignedIn ? (
+            {isLoaded && isSignedIn ? (
               <UserButton afterSignOutUrl='/' />
             ) : (
               <SignInButton mode='modal'>
@@ -315,9 +313,7 @@ const Navbar = () => {
 
           {/* User Account / Auth Section */}
           <div className='mt-2 rounded-2xl border border-gray-200/80 p-3.5 bg-gray-50/50'>
-            {!isLoaded ? (
-              <div className='h-10 w-full animate-pulse rounded-xl bg-gray-200/80' />
-            ) : isSignedIn ? (
+            {isLoaded && isSignedIn ? (
               <div className='flex items-center justify-between'>
                 <span className='text-sm font-semibold text-gray-700'>My Account</span>
                 <UserButton afterSignOutUrl='/' />
