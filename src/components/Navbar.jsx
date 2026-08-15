@@ -182,7 +182,9 @@ const Navbar = () => {
             </Link>
 
             {/* Auth Buttons */}
-            {!isLoaded ? null : isSignedIn ? (
+            {!isLoaded ? (
+              <div className='h-9 w-20 animate-pulse rounded-full bg-gray-200' />
+            ) : isSignedIn ? (
               <UserButton afterSignOutUrl='/' />
             ) : (
               <SignInButton mode='modal'>
@@ -218,7 +220,7 @@ const Navbar = () => {
       {/* Mobile Sidebar */}
       <aside
         ref={sidebarRef}
-        className='fixed left-0 top-0 z-50 hidden h-full w-80 max-w-[85vw] overflow-y-auto border-r border-gray-200 bg-white p-5 shadow-2xl lg:hidden'
+        className='fixed left-0 top-0 z-50 hidden h-full h-[100dvh] w-80 max-w-[85vw] overflow-y-auto overscroll-contain border-r border-gray-200 bg-white p-5 pb-24 shadow-2xl lg:hidden'
       >
         <div className='flex items-center justify-between pb-4 border-b border-gray-100'>
           <h2 className='text-2xl font-extrabold tracking-tight'>
@@ -233,7 +235,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className='mt-5 flex flex-col gap-4'>
+        <div className='mt-5 flex flex-col gap-4 pb-12'>
           {/* Mobile Sidebar Address Card (Inline Collapsible) */}
           <div className='overflow-hidden rounded-2xl border border-gray-200/80 bg-gray-50/70 transition-all'>
             <div className='flex items-center justify-between p-3.5'>
@@ -313,14 +315,20 @@ const Navbar = () => {
 
           {/* User Account / Auth Section */}
           <div className='mt-2 rounded-2xl border border-gray-200/80 p-3.5 bg-gray-50/50'>
-            {!isLoaded ? null : isSignedIn ? (
+            {!isLoaded ? (
+              <div className='h-10 w-full animate-pulse rounded-xl bg-gray-200/80' />
+            ) : isSignedIn ? (
               <div className='flex items-center justify-between'>
                 <span className='text-sm font-semibold text-gray-700'>My Account</span>
                 <UserButton afterSignOutUrl='/' />
               </div>
             ) : (
               <SignInButton mode='modal'>
-                <button className='w-full rounded-xl bg-red-500 py-2.5 text-sm font-semibold text-white transition hover:bg-red-600 shadow-md shadow-red-500/20 cursor-pointer'>
+                <button
+                  type='button'
+                  onClick={closeMobileMenu}
+                  className='w-full rounded-xl bg-red-500 py-2.5 text-sm font-semibold text-white transition hover:bg-red-600 shadow-md shadow-red-500/20 cursor-pointer'
+                >
                   Login / Sign Up
                 </button>
               </SignInButton>
